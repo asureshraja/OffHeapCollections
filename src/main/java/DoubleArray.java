@@ -12,11 +12,21 @@ public class DoubleArray {
         this.capacity=capacity;
     }
 
+    public long getCapacity() {
+        return capacity;
+    }
+
     public int get(long index){
+        if(index<0&&index>=capacity){
+            throw new ArrayIndexOutOfBoundsException();
+        }
         int fileNumber=(int)(index*8/(OffHeapCollection.fileLimit));
         return mappedFileBuffers.get(fileNumber).getInt((int) (index - (fileNumber * (OffHeapCollection.fileLimit / 8))) * 8);
     }
     public void put(long index,int value){
+        if(index<0&&index>=capacity){
+            throw new ArrayIndexOutOfBoundsException();
+        }
         int fileNumber=(int)(index*8/(OffHeapCollection.fileLimit));
         mappedFileBuffers.get(fileNumber).putInt((int) (index - (fileNumber * (OffHeapCollection.fileLimit / 8))) * 8, value);
     }
