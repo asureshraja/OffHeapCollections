@@ -1,13 +1,17 @@
+package Arrays;
+
+import Utils.OffHeapCollection;
+
 import java.nio.MappedByteBuffer;
 import java.util.ArrayList;
 
 /**
  * Created by suresh on 26/8/15.
  */
-public class LongArray {
+public class LongArray  {
     private ArrayList<MappedByteBuffer> mappedFileBuffers=new ArrayList<MappedByteBuffer>();
     private long capacity;
-    LongArray(ArrayList<MappedByteBuffer> mappedFileBuffers, Long capacity){
+    public LongArray(ArrayList<MappedByteBuffer> mappedFileBuffers, Long capacity){
         this.mappedFileBuffers=mappedFileBuffers;
         this.capacity=capacity;
     }

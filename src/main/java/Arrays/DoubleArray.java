@@ -1,3 +1,7 @@
+package Arrays;
+
+import Utils.OffHeapCollection;
+
 import java.nio.MappedByteBuffer;
 import java.util.ArrayList;
 
@@ -7,7 +11,7 @@ import java.util.ArrayList;
 public class DoubleArray {
     private ArrayList<MappedByteBuffer> mappedFileBuffers=new ArrayList<MappedByteBuffer>();
     private long capacity;
-    DoubleArray(ArrayList<MappedByteBuffer> mappedFileBuffers, Long capacity){
+    public DoubleArray(ArrayList<MappedByteBuffer> mappedFileBuffers, Long capacity){
         this.mappedFileBuffers=mappedFileBuffers;
         this.capacity=capacity;
     }
@@ -24,6 +28,7 @@ public class DoubleArray {
         return mappedFileBuffers.get(fileNumber).getInt((int) (index - (fileNumber * (OffHeapCollection.fileLimit / 8))) * 8);
     }
     public void put(long index,int value){
+
         if(index<0&&index>=capacity){
             throw new ArrayIndexOutOfBoundsException();
         }

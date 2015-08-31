@@ -1,3 +1,7 @@
+package Utils;
+
+import Arrays.*;
+
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
@@ -9,7 +13,7 @@ import java.util.ArrayList;
  */
 public class OffHeapCollection {
     private static String tempFolder="/tmp/";
-    public static int fileLimit= 134217728+16; // 128 Mb + 16 bytes because it guarantees to prevent index max overflow for IntArray,LongArray,DoubleArray
+    public static int fileLimit= 134217728+16; // 128 Mb + 16 bytes because it guarantees to prevent index max overflow for ArrayTypes.IntArray,ArrayTypes.LongArray,ArrayTypes.DoubleArray
     private static long count=0;
     public static IntArray createIntArray(long capacity){
         MappedByteBuffer buffer;
@@ -57,7 +61,7 @@ public class OffHeapCollection {
         ArrayList<MappedByteBuffer> mappedFileBuffers;
         mappedFileBuffers=new ArrayList<MappedByteBuffer>();
         try {
-            Long numOfFilesToCreate=new Long(capacity*8/fileLimit)+1;
+            Long numOfFilesToCreate=new Long(capacity*4/fileLimit)+1;
             for(int i=0;i<numOfFilesToCreate;i++){
                 buffer = new RandomAccessFile(tempFolder+"offheap"+(count++)+".dat", "rw")
                         .getChannel().map(FileChannel.MapMode.READ_WRITE, 0, fileLimit);
